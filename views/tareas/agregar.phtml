@@ -1,0 +1,64 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="display-2 text-center mb-3">Agregar tarea</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<form action="<?php echo APP_URL."tareas/agregar"; ?>" method="POST" accept-charset="utf-8">
+	
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Nombre</span>
+					</div>
+					<input type="text" name="nombre" id="" class="form-control">
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Descripción</span>
+					</div>
+					<textarea name="descripcion" class="form-control"></textarea>
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Fecha</span>
+					</div>
+					<input type="date" name="fecha" value="<?php echo date("Y-m-d"); ?>" class="form-control">
+				</div>
+		</div>
+		<div class="col-md-6">
+				
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Prioridad</span>
+					</div>
+					<input type="range" name="prioridad" min="1" max="10" class="form-control">
+				</div>
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Categoría</span>
+					</div>
+					<select name="categoria_id" class="form-control">
+					<?php 
+					foreach ($this->categorias as $categoria) { ?>
+						<option value="<?php echo $categoria["id"]; ?>">
+							<?php echo $categoria["nombre"]; ?></option>	
+					<?php } ?>
+				</select>
+				</div>
+
+		</div>
+		<div class="col-md-12">
+			<div class="row justify-content-center">
+				<div class="col-md-4">
+					<button type="submit" class="btn btn-success btn-block">Guardar tarea</button>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
