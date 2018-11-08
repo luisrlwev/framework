@@ -1,0 +1,51 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="display-2 text-center">Lista de tareas</h2>
+			<a href="<?php echo APP_URL. "tareas/agregar"; ?>" class="btn btn-outline-success mb-3">Agregar tarea</a>
+			<a href="<?php echo APP_URL. "categorias/index"; ?>" class="btn btn-outline-primary mb-3">Ver categorias</a>
+
+			<table border="1" class="table table-dark table-responsive-lg text-center">
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Fecha</th>
+					<th>Prioridad</th>
+					<th>Categorias</th>
+					<th>Acción</th>
+				</tr>
+				<?php foreach ($this->tareas as $tarea): ?>
+				<tr>
+					<td><?php echo $tarea["tareas"]["id"]; ?></td>
+					<td><?php 
+						if ($tarea["tareas"]["status"]==0):
+							echo "<s>".$tarea["tareas"]["nombre"]."</s>";
+						else:
+							echo $tarea["tareas"]["nombre"];
+						endif;
+					 ?>
+					</td>
+					<td><?php 
+						$date = date_create($tarea["tareas"]["fecha"]);
+						echo date_format($date, 'j F Y');
+					 ?></td>
+					 <td><?php 
+					 	if ($tarea["tareas"]["prioridad"]<=3) {
+					 		echo '<p class="btn-success">Baja<p>';
+					 	}else if($tarea["tareas"]["prioridad"]<=6) {
+					 		echo '<p class="btn-warning">Media</p>';
+					 	}else if($tarea["tareas"]["prioridad"]<=10){
+					 		echo '<p class="btn-danger">Alta</p>';
+					 	}
+					  	?>
+					 </td>
+					<td><?php echo $tarea["categorias"]["nombre"]; ?></td>
+					<td><a href="<?php echo APP_URL. "tareas/editar/". $tarea["tareas"]["id"]; ?>" class="btn btn-primary mr-3 mb-1 mt-1">Editar</a><a href="<?php echo APP_URL. "tareas/eliminar/". $tarea["tareas"]["id"]; ?>" class="btn btn-danger mr-3 mb-1 mt-1 confirmation">Eliminar</a><?php if ($tarea["tareas"]["status"]==1) { ?><a href="<?php echo APP_URL. "tareas/cambiarEstado/".$tarea["tareas"]["id"]."/off"; ?>" class="btn btn-success mb-1 mt-1">Cerrar</a><?php }elseif ($tarea["tareas"]["status"]==0) { ?><a href="<?php echo APP_URL. "tareas/cambiarEstado/".$tarea["tareas"]["id"]."/on"; ?>" class="btn btn-success mb-1 mt-1">Abrir</a>
+					<?php } ?>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+			</table>
+		</div>
+	</div>
+</div>
