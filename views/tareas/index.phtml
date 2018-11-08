@@ -3,6 +3,7 @@
 		<div class="col-md-12">
 			<h2 class="display-2 text-center">Lista de tareas</h2>
 			<a href="<?php echo APP_URL. "tareas/agregar"; ?>" class="btn btn-outline-success mb-3">Agregar tarea</a>
+			<a href="<?php echo APP_URL. "categorias/index"; ?>" class="btn btn-outline-primary mb-3">Ver categorias</a>
 
 			<table border="1" class="table table-dark table-responsive-lg text-center">
 				<tr>
@@ -39,8 +40,7 @@
 					  	?>
 					 </td>
 					<td><?php echo $tarea["categorias"]["nombre"]; ?></td>
-					<td><a href="<?php echo APP_URL. "tareas/editar/". $tarea["tareas"]["id"]; ?>" class="btn btn-primary mr-3 mb-1 mt-1">Editar</a><a href="<?php echo APP_URL. "tareas/eliminar/". $tarea["tareas"]["id"]; ?>" class="btn btn-danger mr-3 mb-1 mt-1">Eliminar</a><?php if ($tarea["tareas"]["status"]==1) { ?>
-						<a href="<?php echo APP_URL. "tareas/cambiarEstado/".$tarea["tareas"]["id"]."/off"; ?>" class="btn btn-success mb-1 mt-1">Cerrar</a><?php }elseif ($tarea["tareas"]["status"]==0) { ?><a href="<?php echo APP_URL. "tareas/cambiarEstado/".$tarea["tareas"]["id"]."/on"; ?>" class="btn btn-success mb-1 mt-1">Abrir</a>
+					<td><a href="<?php echo APP_URL. "tareas/editar/". $tarea["tareas"]["id"]; ?>" class="btn btn-primary mr-3 mb-1 mt-1">Editar</a><a href="<?php echo APP_URL. "tareas/eliminar/". $tarea["tareas"]["id"]; ?>" class="btn btn-danger mr-3 mb-1 mt-1 confirmation">Eliminar</a><?php if ($tarea["tareas"]["status"]==1) { ?><a href="<?php echo APP_URL. "tareas/cambiarEstado/".$tarea["tareas"]["id"]."/off"; ?>" class="btn btn-success mb-1 mt-1">Cerrar</a><?php }elseif ($tarea["tareas"]["status"]==0) { ?><a href="<?php echo APP_URL. "tareas/cambiarEstado/".$tarea["tareas"]["id"]."/on"; ?>" class="btn btn-success mb-1 mt-1">Abrir</a>
 					<?php } ?>
 					</td>
 				</tr>

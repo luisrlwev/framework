@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="display-2 text-center mb-3">Agregar categoria</h2>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<form action="<?php echo APP_URL."categorias/agregar"; ?>" method="POST" accept-charset="utf-8">
+	
+				<div class="col-6 input-group mb-3 offset-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text">Nombre</span>
+					</div>
+					<input type="text" name="nombre" id="" class="form-control">
+				</div>
+
+		</div>
+		<div class="col-md-12">
+			<div class="row justify-content-center">
+				<div class="col-md-4">
+					<button type="submit" class="btn btn-success btn-block">Guardar categoria</button>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>

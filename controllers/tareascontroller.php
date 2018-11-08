@@ -1,14 +1,22 @@
 <?php
-
+/**
+ * Clase de tareas
+ */
 class tareasController extends AppController
-{
+{	
+	/**
+	 * [__construct Constructor de controlador de tareas]
+	 */
 	public function __construct(){
 		parent::__construct();
 
 		$this->_view = new View(new Request);
 		$this->_messages = new \Plasticbrain\FlashMessages\flashMessages();
 	}
-
+	/**
+	 * Función de index
+	 * @return void No retorna algo
+	 */
 	public function index(){
 		$tareas = $this->loadmodel("tarea");
 		$this->_view->tareas = $tareas->getTareas();
@@ -16,7 +24,10 @@ class tareasController extends AppController
 		$this->_view->titulo = "Página principal";
 		$this->_view->renderizar("index");
 	}
-
+	/**
+	 * Función de agregar
+	 * @return void No retorna algo
+	 */
 	public function agregar(){
 		
 		if ($_POST) {
@@ -31,7 +42,11 @@ class tareasController extends AppController
 		$this->_view->titulo = "Agregar tarea";
 		$this->_view->renderizar("agregar");
 	}
-
+	/**
+	 * Función de editar
+	 * @param  int $id id de editar en categorias
+	 * @return void no retorna algo
+	 */
 	public function editar($id=null){
 		if ($_POST) {
 			$tarea = $this->loadmodel("tarea");
@@ -51,17 +66,28 @@ class tareasController extends AppController
 		$this->_view->titulo = "Editar tarea";
 		$this->_view->renderizar("editar");
 	}
-
+	/**
+	 * Función eliminar
+	 * @param  int $id id de eliminar
+	 * @return void     No retorna algo
+	 */
 	public function eliminar($id){
 		$tarea = $this->loadModel("tarea");
 		$registro = $tarea->buscarPorId($id);
 
 		if (!empty($registro)) {
 			$tarea->eliminarPorId($id);
-			$this->redirect(array("controller"=>"tareas"));
+			if ($tarea->actualizar($_POST)) {
+			$this->_messages->success('Tarea eliminada correctamente', $this->redirect(array("controller"=>"tareas")));
+			}
 		}
 	}
-
+	/**
+	 * Función de cambiarEstado
+	 * @param  int $id     id del estado
+	 * @param  tinyint $status status del estado
+	 * @return void         No retorna algo
+	 */
 	public function cambiarEstado($id, $status){
 		$tarea = $this->loadModel("tarea");
 
@@ -72,8 +98,6 @@ class tareasController extends AppController
 		}
 
 		$tarea->status($id, $status);
-		$this->redirect(
-			array("controller"=>"tareas"));
+		$this->_messages->success('Estado actualizado', $this->redirect(array("controller"=>"tareas")));
 	}
-
 }
